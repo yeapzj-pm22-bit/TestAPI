@@ -1,34 +1,36 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "A test API to simulate Excel import endpoints for K2",
     "version": "1.0.0",
-    "title": "Test Excel API1"
+    "title": "Test Excel API1",
+    "description": "A test API to simulate Excel import endpoints for K2"
   },
   "host": "virtserver.swaggerhub.com",
   "basePath": "/yeapzjpm22organizati/TestExcelAPI1/1.0.0",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "paths": {
     "/todos/{id}": {
       "get": {
-        "summary": "Get a single todo item",
         "operationId": "getTodoById",
+        "summary": "Get a single todo item",
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "ID of the todo item",
             "required": true,
-            "type": "integer"
+            "type": "integer",
+            "format": "int32",
+            "description": "ID of the todo item"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/inline_response_200"
+              "$ref": "#/definitions/TodoItem"
             }
           }
         }
@@ -36,22 +38,18 @@
     },
     "/excel/import": {
       "post": {
-        "summary": "Simulate Excel import",
         "operationId": "importExcelData",
-        "consumes": [
-          "application/json"
-        ],
+        "summary": "Simulate Excel import",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
-            "in": "body",
             "name": "excelData",
-            "description": "JSON data representing Excel rows",
+            "in": "body",
             "required": true,
+            "description": "JSON data representing Excel rows",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/excelData"
-              }
+              "$ref": "#/definitions/ExcelDataRequest"
             }
           }
         ],
@@ -59,7 +57,7 @@
           "200": {
             "description": "Import successful",
             "schema": {
-              "$ref": "#/definitions/inline_response_200_1"
+              "$ref": "#/definitions/ImportResponse"
             }
           }
         }
@@ -67,55 +65,28 @@
     }
   },
   "definitions": {
-    "excelData": {
+    "TodoItem": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string",
-          "example": "John Doe"
-        },
-        "age": {
-          "type": "integer",
-          "example": 25
-        },
-        "email": {
-          "type": "string",
-          "example": "john@example.com"
-        }
+        "userId": { "type": "integer", "format": "int32" },
+        "id": { "type": "integer", "format": "int32" },
+        "title": { "type": "string" },
+        "completed": { "type": "boolean" }
       }
     },
-    "inline_response_200_1": {
+    "ExcelDataRequest": {
       "type": "object",
       "properties": {
-        "status": {
-          "type": "string",
-          "example": "success"
-        },
-        "insertedRows": {
-          "type": "integer",
-          "example": 3
-        }
+        "name": { "type": "string" },
+        "age": { "type": "integer", "format": "int32" },
+        "email": { "type": "string" }
       }
     },
-    "inline_response_200": {
+    "ImportResponse": {
       "type": "object",
       "properties": {
-        "userId": {
-          "type": "integer",
-          "example": 1
-        },
-        "id": {
-          "type": "integer",
-          "example": 1
-        },
-        "title": {
-          "type": "string",
-          "example": "delectus aut autem"
-        },
-        "completed": {
-          "type": "boolean",
-          "example": false
-        }
+        "status": { "type": "string" },
+        "insertedRows": { "type": "integer", "format": "int32" }
       }
     }
   }
