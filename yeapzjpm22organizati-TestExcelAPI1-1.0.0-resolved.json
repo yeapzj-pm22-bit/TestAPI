@@ -10,9 +10,13 @@
   "schemes": ["https"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
+  "tags": [
+    { "name": "TestExcelAPI", "description": "Test Excel API operations" }
+  ],
   "paths": {
     "/todos/{id}": {
       "get": {
+        "tags": ["TestExcelAPI"],
         "operationId": "getTodoById",
         "summary": "Get a single todo item",
         "produces": ["application/json"],
@@ -38,6 +42,7 @@
     },
     "/excel/import": {
       "post": {
+        "tags": ["TestExcelAPI"],
         "operationId": "importExcelData",
         "summary": "Simulate Excel import",
         "consumes": ["application/json"],
