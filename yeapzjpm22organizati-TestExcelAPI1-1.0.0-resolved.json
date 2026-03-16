@@ -1,1 +1,99 @@
 
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Test Excel API1",
+    "description": "A test API to simulate Excel import endpoints for K2"
+  },
+  "host": "virtserver.swaggerhub.com",
+  "basePath": "/yeapzjpm22organizati/TestExcelAPI1/1.0.0",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "tags": [
+    { "name": "TestExcelAPI", "description": "Test Excel API operations" }
+  ],
+  "paths": {
+    "/todos/{id}": {
+      "get": {
+        "tags": ["TestExcelAPI"],
+        "operationId": "getTodoById",
+        "summary": "Get a single todo item",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "ID of the todo item"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TodoItem"
+            }
+          }
+        }
+      }
+    },
+    "/excel/import": {
+      "post": {
+        "tags": ["TestExcelAPI"],
+        "operationId": "importExcelData",
+        "summary": "Simulate Excel import",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "excelData",
+            "in": "body",
+            "required": true,
+            "description": "JSON data representing Excel rows",
+            "schema": {
+              "$ref": "#/definitions/ExcelDataRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Import successful",
+            "schema": {
+              "$ref": "#/definitions/ImportResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TodoItem": {
+      "type": "object",
+      "properties": {
+        "userId": { "type": "integer", "format": "int32" },
+        "id": { "type": "integer", "format": "int32" },
+        "title": { "type": "string" },
+        "completed": { "type": "boolean" }
+      }
+    },
+    "ExcelDataRequest": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "age": { "type": "integer", "format": "int32" },
+        "email": { "type": "string" }
+      }
+    },
+    "ImportResponse": {
+      "type": "object",
+      "properties": {
+        "status": { "type": "string" },
+        "insertedRows": { "type": "integer", "format": "int32" }
+      }
+    }
+  }
+}
