@@ -14,6 +14,7 @@
     "/todos/{id}": {
       "get": {
         "summary": "Get a single todo item",
+        "operationId": "getTodoById",
         "parameters": [
           {
             "name": "id",
@@ -36,6 +37,7 @@
     "/excel/import": {
       "post": {
         "summary": "Simulate Excel import",
+        "operationId": "importExcelData",
         "consumes": [
           "application/json"
         ],
